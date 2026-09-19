@@ -1,6 +1,6 @@
 const questions=["毎日または毎週、同じPC作業を繰り返している？","ExcelやCSVのコピー・転記が多い？","ファイル整理や書類作成を手作業で行っている？","作業手順はある程度決まっている？","その作業に時間や負担を感じている？"];
 const choices=[['yes','はい','当てはまる'],['no','いいえ','当てはまらない'],['unknown','わからない','判断がつかない']];
-const endpoint='https://shu-sns-ops.taikoshuhei.chatgpt.site/api/diagnosis-event';
+const endpoint='https://shu-automation-diagnosis.taikoshuhei.chatgpt.site/api/diagnosis-event';
 let step=-1,answers=Array(5).fill(null);
 function source(){const p=new URLSearchParams(location.search);if(p.has('qa')||p.get('utm_source')==='test')return'test';const raw=(p.get('utm_source')||'').toLowerCase();const s=raw==='ig'?'instagram':raw;return['youtube','instagram','tiktok','note'].includes(s)?s:s?'other':'direct'}
 function track(event){const body=JSON.stringify({event,source:source()});try{navigator.sendBeacon(endpoint,new Blob([body],{type:'text/plain;charset=UTF-8'}))}catch{fetch(endpoint,{method:'POST',headers:{'content-type':'text/plain;charset=UTF-8'},body,keepalive:true}).catch(()=>{})}}
