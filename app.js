@@ -4,12 +4,28 @@ const endpoint = "https://shu-automation-diagnosis.taikoshuhei.chatgpt.site/api/
 let step = -1;
 let answers = Array(5).fill(null);
 
+const attributionKey = "shu-automation-attribution-v1";
+
 function attribution() {
   const p = new URLSearchParams(location.search);
-  if (p.has("qa") || p.get("utm_source") === "test") return { source: "test", medium: "qa", campaign: "test", content: "" };
+  const hasUtm = ["utm_source", "utm_medium", "utm_campaign", "utm_content"].some((key) => p.has(key));
+  if (p.has("qa") || p.get("utm_source")?.toLowerCase() === "test") {
+    const test = { source: "test", medium: (p.get("utm_medium") || "qa").slice(0, 80), campaign: (p.get("utm_campaign") || "test").slice(0, 120), content: (p.get("utm_content") || "qa").slice(0, 120) };
+    sessionStorage.setItem(attributionKey, JSON.stringify(test));
+    return test;
+  }
   const raw = (p.get("utm_source") || "").toLowerCase();
   const source = raw === "ig" ? "instagram" : ["youtube", "instagram", "tiktok", "threads", "note"].includes(raw) ? raw : raw ? "other" : "direct";
-  return { source, medium: (p.get("utm_medium") || "").slice(0, 80), campaign: (p.get("utm_campaign") || "").slice(0, 120), content: (p.get("utm_content") || "").slice(0, 120) };
+  if (hasUtm) {
+    const current = { source, medium: (p.get("utm_medium") || "").slice(0, 80), campaign: (p.get("utm_campaign") || "").slice(0, 120), content: (p.get("utm_content") || "").slice(0, 120) };
+    sessionStorage.setItem(attributionKey, JSON.stringify(current));
+    return current;
+  }
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(attributionKey) || "null");
+    if (saved?.source) return saved;
+  } catch {}
+  return { source: "direct", medium: "", campaign: "", content: "" };
 }
 
 function track(event) {
