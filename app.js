@@ -45,7 +45,7 @@ function result() {
 function render() {
   const app = document.querySelector("#app");
   if (step < 0) {
-    app.innerHTML = `<section class="card"><div class="kicker">✣ 5問・約1分</div><h1>そのPC作業、<br><em>自動化できる？</em></h1><p class="lead">Excel・コピペ・書類作成など、日々の面倒なPC作業を整理し、自動化や小さな改善を検討できそうか確認します。HP制作を含むPCまわりの相談も、分からない段階からOKです。</p><div class="examples"><span>▦ Excel・CSV</span><span>▱ 書類・ファイル整理</span></div><button class="primary" id="start">無料で診断する　→</button><small class="privacy">♢ 氏名・メールアドレスは入力しません</small></section>`;
+    app.innerHTML = `<section class="card"><div class="kicker">✣ 5問・約1分</div><h1>そのPC作業、<br><em>自動化できる？</em></h1><p class="lead">Excel・コピペ・書類作成など、毎日の“ちょっと面倒”を5つの質問で整理します。</p><div class="examples"><span>5問・約1分</span><span>個人情報入力不要</span><span>結果だけ見て終了でもOK</span></div><button class="primary" id="start">無料で診断を始める　→</button></section>`;
     document.querySelector("#start").onclick = () => { step = 0; track("start"); render(); };
     return;
   }
@@ -56,7 +56,7 @@ function render() {
     return;
   }
   const [label, summary, candidates] = result();
-  app.innerHTML = `<section class="card result"><div class="kicker">✓ 診断結果</div><h1>${label}</h1><p class="summary">${summary}</p><div class="result-grid"><div><h2>検討できそうなこと</h2><ul>${candidates.map((x) => `<li>${x}</li>`).join("")}</ul></div><div><h2>確認しておきたいこと</h2><ul><li>使用中のシステムやファイル形式</li><li>毎回変わる判断や例外の有無</li><li>処理件数・頻度・希望する完成形</li></ul></div></div><div class="next"><h2>次に取れる行動</h2><p>まず1週間、作業の手順と所要時間をメモしてみましょう。具体的に相談したい場合は、個別の業務内容に合わせて実現方法・必要機能・概算費用・納期を整理します。</p></div><a class="cta" href="https://coconala.com/services/4369926" target="_blank" rel="noreferrer">あなたの作業を具体的に相談する　↗</a><p class="paid">個別相談では、アプリやツール本体ではなく、実現プランを文章で納品します。</p><button class="restart">↻ もう一度診断する</button><p class="disclaimer">実現可否は、使用環境・業務ルール・外部サービスの仕様や規約によって異なります。</p></section>`;
+  app.innerHTML = `<section class="card result"><div class="kicker">✓ 診断結果</div><h1>${label}</h1><p class="summary">${summary}</p><div class="result-grid"><div><h2>検討できそうなこと</h2><ul>${candidates.map((x) => `<li>${x}</li>`).join("")}</ul></div><div><h2>確認しておきたいこと</h2><ul><li>使用中のシステムやファイル形式</li><li>毎回変わる判断や例外の有無</li><li>処理件数・頻度・希望する完成形</li></ul></div></div><div class="next"><h2>次に取れる行動</h2><p>まず1週間、作業の手順と所要時間をメモしてみましょう。具体的に相談したい場合は、個別の業務内容に合わせて実現方法・必要機能・概算費用・納期を整理します。</p></div><a class="cta" href="https://coconala.com/services/4398349" target="_blank" rel="noreferrer">あなたの作業を具体的に相談する　↗</a><p class="paid">個別相談では、アプリやツール本体ではなく、実現プランを文章で納品します。</p><button class="restart">↻ もう一度診断する</button><p class="disclaimer">実現可否は、使用環境・業務ルール・外部サービスの仕様や規約によって異なります。</p></section>`;
   document.querySelector(".cta").onclick = () => track("coconala_click");
   document.querySelector(".restart").onclick = () => { answers = Array(5).fill(null); step = 0; track("start"); render(); };
 }
