@@ -1,0 +1,19 @@
+.youtube-landing h1 {
+  font-size: clamp(30px, 6.5vw, 48px);
+  margin-bottom: 16px;
+}
+.youtube-intro { margin: 0 0 10px; color: var(--navy); font-size: 15px; }
+.youtube-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.youtube-benefits li { display: flex; align-items: center; min-height: 44px; padding: 9px 12px; border: 1px solid #d8e6f0; border-radius: 12px; background: #f4f9fc; color: #2c526f; font-size: 14px; font-weight: 800; }
+.youtube-benefits li::before { content: "✓"; margin-right: 7px; color: var(--green); font-weight: 900; }
+.youtube-landing .examples { margin: 18px 0; }
+.youtube-time { margin: 10px 0 0; color: #64778c; text-align: center; font-size: 12px; font-weight: 800; }
+@media (max-width: 600px) {
+  .youtube-landing { padding-top: 21px; }
+  .youtube-landing h1 { margin: 13px 0; font-size: clamp(29px, 9vw, 38px); }
+  .youtube-benefits { gap: 7px; }
+  .youtube-benefits li { min-height: 42px; padding: 8px 9px; font-size: 12px; }
+  .youtube-landing .examples { gap: 7px; margin: 14px 0; }
+  .youtube-landing .examples span { padding: 9px 10px; font-size: 12px; }
+  .youtube-landing .primary { min-height: 56px; font-size: 15px; }
+}
