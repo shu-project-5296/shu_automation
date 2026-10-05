@@ -1,19 +1,25 @@
 .youtube-landing h1 {
   font-size: clamp(30px, 6.5vw, 48px);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
-.youtube-intro { margin: 0 0 10px; color: var(--navy); font-size: 15px; }
-.youtube-benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 0; padding: 0; list-style: none; }
-.youtube-benefits li { display: flex; align-items: center; min-height: 44px; padding: 9px 12px; border: 1px solid #d8e6f0; border-radius: 12px; background: #f4f9fc; color: #2c526f; font-size: 14px; font-weight: 800; }
-.youtube-benefits li::before { content: "✓"; margin-right: 7px; color: var(--green); font-weight: 900; }
-.youtube-landing .examples { margin: 18px 0; }
-.youtube-time { margin: 10px 0 0; color: #64778c; text-align: center; font-size: 12px; font-weight: 800; }
+.short-context { margin: 0 0 12px; color: var(--muted); font-size: 15px; line-height: 1.65; }
+.youtube-intro { margin: 0 0 10px; color: var(--navy); font-size: 16px; }
+.trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin: 0 0 15px; }
+.trust-grid span { padding: 8px 10px; border-radius: 10px; background: #eff9f4; color: #176745; font-size: 12px; font-weight: 900; }
+.task-examples { margin-top: 17px; padding-top: 14px; border-top: 1px solid var(--line); }
+.task-examples b { color: var(--navy); font-size: 13px; }
+.task-examples ul { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 12px; margin: 9px 0 0; padding: 0; list-style: none; }
+.task-examples li { color: #53677d; font-size: 12px; line-height: 1.45; }
+.task-examples li::before { content: "・"; color: var(--green); font-weight: 900; }
 @media (max-width: 600px) {
-  .youtube-landing { padding-top: 21px; }
-  .youtube-landing h1 { margin: 13px 0; font-size: clamp(29px, 9vw, 38px); }
-  .youtube-benefits { gap: 7px; }
-  .youtube-benefits li { min-height: 42px; padding: 8px 9px; font-size: 12px; }
-  .youtube-landing .examples { gap: 7px; margin: 14px 0; }
-  .youtube-landing .examples span { padding: 9px 10px; font-size: 12px; }
+  .youtube-landing { padding: 19px 18px; }
+  .youtube-landing h1 { margin: 10px 0 8px; font-size: clamp(28px, 8.7vw, 36px); }
+  .short-context { margin-bottom: 9px; font-size: 13px; line-height: 1.5; }
+  .youtube-intro { margin-bottom: 8px; font-size: 14px; }
+  .trust-grid { gap: 6px; margin-bottom: 12px; }
+  .trust-grid span { padding: 7px 8px; font-size: 11px; }
   .youtube-landing .primary { min-height: 56px; font-size: 15px; }
+  .task-examples { margin-top: 13px; padding-top: 11px; }
+  .task-examples ul { margin-top: 7px; gap: 5px 8px; }
+  .task-examples li { font-size: 11px; }
 }

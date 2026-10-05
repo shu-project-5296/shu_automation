@@ -6,15 +6,16 @@ let answers = Array(5).fill(null);
 
 const attributionKey = "shu-automation-attribution-v1";
 const landingParams = new URLSearchParams(location.search);
-const landingVariant = landingParams.get("utm_source")?.toLowerCase() === "youtube" ? "youtube" : "default";
+const landingSource = landingParams.get("utm_source")?.toLowerCase() || "";
+const landingVariant = landingSource === "youtube" ? "youtube" : "default";
+const isShortVideoLanding = landingSource === "youtube" || landingSource === "tiktok";
 
-const youtubeHeadlines = {
-  shorts08_invoice: "請求書作成、その作業<br><em>どこまで減らせる？</em>",
-  shorts09_hp: "SNSだけで十分？<br><em>必要なホームページの形を整理</em>",
-  shorts10_consult: "「これ作れる？」<br><em>方法・費用・納期の目安を整理</em>",
-  shorts11_30docs: "30人分の書類作成、<br><em>まとめて減らせる？</em>",
-  shorts12_rename: "50件のファイル名変更、<br><em>まとめて処理できる？</em>",
-  shorts13_transfer: "毎月50件のExcel転記、<br><em>どこまで減らせる？</em>",
+const shortVideoMessages = {
+  shorts08_invoice: "請求書を1件ずつ作っているなら、まず診断できます。",
+  shorts11_30docs: "何件も同じ書類を作る作業なら、減らせる工程を確認できます。",
+  shorts13_transfer: "毎月のExcel転記、どこまで減らせるか確認できます。",
+  shorts14_excel_transfer: "毎月のExcel転記、どこまで減らせるか確認できます。",
+  shorts15_invoice_voice: "請求書を1件ずつ作っているなら、まず診断できます。",
 };
 
 function attribution() {
@@ -46,12 +47,12 @@ function track(event) {
 }
 
 function startScreen() {
-  if (landingVariant !== "youtube") {
+  if (!isShortVideoLanding) {
     return `<section class="card"><div class="kicker">✣ 5問・約1分</div><h1>そのPC作業、<br><em>自動化できる？</em></h1><p class="lead">Excel・コピペ・書類作成など、毎日の“ちょっと面倒”を5つの質問で整理します。</p><div class="examples"><span>5問・約1分</span><span>個人情報入力不要</span><span>結果だけ見て終了でもOK</span></div><button class="primary" id="start">無料で診断を始める　→</button></section>`;
   }
   const content = landingParams.get("utm_content") || "";
-  const headline = youtubeHeadlines[content] || "この作業、<br><em>どこまでラクにできる？</em>";
-  return `<section class="card youtube-landing"><div class="kicker">▶ Shortsを見た方へ</div><h1>${headline}</h1><p class="youtube-intro"><b>5問・約1分で分かること</b></p><ul class="youtube-benefits"><li>自動化できそうか</li><li>どこを減らせそうか</li><li>作るならどんな方法か</li><li>ざっくり費用感</li></ul><div class="examples"><span>個人情報入力不要</span><span>結果だけ見て終了でもOK</span></div><button class="primary" id="start">この作業を無料で診断する　→</button><p class="youtube-time">5問・約1分</p></section>`;
+  const context = shortVideoMessages[content] || "繰り返しているExcel作業なら、減らせる工程を確認できます。";
+  return `<section class="card youtube-landing"><div class="kicker">▶ 動画を見た方へ</div><h1>そのExcel作業、<br><em>自動化できる？</em></h1><p class="short-context">${context}</p><p class="youtube-intro"><b>5問・約1分でチェック</b></p><div class="trust-grid" aria-label="診断について"><span>✓ 無料</span><span>✓ 名前入力不要</span><span>✓ メール不要</span><span>✓ 結果だけ見て終了OK</span></div><button class="primary" id="start">無料で診断を始める　→</button><div class="task-examples"><b>こんな作業が対象です</b><ul><li>毎月同じExcelへ転記</li><li>CSVの列順を毎回変更</li><li>請求書を1件ずつ作成</li><li>毎月同じ集計を繰り返す</li></ul></div></section>`;
 }
 
 function result() {
